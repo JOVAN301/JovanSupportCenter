@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Jovan Support Center — Admin</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f4faf7;margin:0;color:#063b2e}
+header{background:#063b2e;color:white;padding:20px}
+main{max-width:1000px;margin:20px auto;padding:0 16px}
+.card{background:white;border-radius:12px;padding:18px;margin:14px 0;box-shadow:0 2px 10px #0001}
+button{padding:10px 14px;border:0;border-radius:8px;background:#0a8f55;color:white;margin:4px;cursor:pointer}
+input{padding:11px;width:100%;box-sizing:border-box;margin:6px 0 10px}
+.small{color:#666}
+</style>
+</head>
+<body>
+<header><h2>Jovan Support Center — Admin Dashboard</h2></header>
+<main>
+<div class="card" id="login">
+<h3>Admin Login</h3>
+<input id="email" placeholder="Admin email">
+<input id="password" type="password" placeholder="Password">
+<button onclick="login()">Login</button>
+<p id="loginMsg" class="small"></p>
+</div>
+<div id="app" style="display:none">
+<div class="card"><button onclick="loadAll()">Refresh Dashboard</button>
+<span id="status"></span></div>
+<h3>Users</h3><div id="users"></div>
+<h3>Support Requests</h3><div id="requests"></div>
+<h3>Transactions</h3><div id="transactions"></div>
+</div>
+</main>
+<script>
+let token="";
+const API=localStorage.getItem("jsc_api")||"http://localhost:3000";
+async function login(){
+ const r=await fetch(API+"/auth/login",{method:"POST",headers:{"Content-Type":"application/json"},
+ body:JSON.stringify({email:email.value,password:password.value})});
+ const d=await r.json();
+ if(!r.ok){loginMsg.textContent=d.error||"Login failed";return}
+ if(d.user.role!=="admin"){loginMsg.textContent="This account is not an admin.";return}
+ token=d.token; login.style.display="none"; app.style.display="block"; loadAll();
+}
+async function call(path,opts={}){
+ opts.headers=Object.assign({"Authorization":"Bearer "+token,"Content-Type":"application/json"},opts.headers||{});
+ const r=await fetch(API+path,opts); return [r,await r.json()];
+}
+async function loadAll(){
+ let [r,u]=await call("/admin/users"); users.innerHTML=u.map(x=>`
+ <div class="card"><b>${x.name}</b><br>${x.email}<br>Status: ${x.verification_status}
+ ${x.verification_status!=="verified"?`<button onclick="verifyUser(${x.id})">Verify</button>`:""}</div>`).join("");
+ [r,u]=await call("/admin/requests"); requests.innerHTML=u.map(x=>`
+ <div class="card"><b>${x.title}</b><br>${x.requester_name} — ${x.category}<br>Status: ${x.status}
+ ${x.status==="pending"?`<button onclick="verifyRequest(${x.id})">Verify</button><button onclick="rejectRequest(${x.id})">Reject</button>`:""}</div>`).join("");
+ [r,u]=await call("/admin/transactions"); transactions.innerHTML=u.map(x=>`
+ <div class="card"><b>${x.title}</b><br>${x.supporter_name}: UGX ${x.amount}<br>Status: ${x.payment_status}</div>`).join("");
+}
+async function verifyUser(id){await call("/admin/users/"+id+"/verify",{method:"POST"});loadAll()}
+async function verifyRequest(id){await call("/admin/requests/"+id+"/verify",{method:"POST"});loadAll()}
+async function rejectRequest(id){await call("/admin/requests/"+id+"/reject",{method:"POST"});loadAll()}
+</script>
+</body>
+</html>

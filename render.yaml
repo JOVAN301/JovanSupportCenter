@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: jovan-support-center-api
+    runtime: docker
+    rootDir: backend
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true
+      - key: DB_FILE
+        value: /var/data/jovan-support.db
+    disk:
+      name: jovan-support-data
+      mountPath: /var/data
+      sizeGB: 1

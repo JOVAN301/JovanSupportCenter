@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5FAF7">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <ImageView
+            android:id="@+id/profilePhoto"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:src="@drawable/profile_photo"
+            android:scaleType="centerCrop"
+            android:contentDescription="Jovan profile photo" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Jovan Support Center"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textColor="#063B2E"
+            android:gravity="center"
+            android:layout_marginTop="16dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Real People • Real Help • A Better Tomorrow"
+            android:textSize="16sp"
+            android:textColor="#287A5D"
+            android:gravity="center"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Together we can make a difference."
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#063B2E"
+            android:gravity="center"
+            android:layout_marginTop="28dp"
+            android:layout_marginBottom="20dp"/>
+
+        <Button
+            android:id="@+id/btnRequest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="I Need Support"
+            android:textAllCaps="false"/>
+
+        <Button
+            android:id="@+id/btnDonate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="I Want to Help"
+            android:textAllCaps="false"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Support Categories"
+            android:textSize="21sp"
+            android:textStyle="bold"
+            android:textColor="#063B2E"
+            android:layout_marginTop="28dp"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Education   •   Medical   •   Food   •   Rent   •   Emergency   •   Jobs"
+            android:textSize="16sp"
+            android:textColor="#333333"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Get in Touch"
+            android:textSize="21sp"
+            android:textStyle="bold"
+            android:textColor="#063B2E"
+            android:layout_marginTop="28dp"/>
+
+        <Button
+            android:id="@+id/btnSupport"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Call 0758201628"
+            android:textAllCaps="false"
+            android:layout_marginTop="10dp"/>
+
+        <Button
+            android:id="@+id/btnEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Email jovialpro657@gmail.com"
+            android:textAllCaps="false"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Support Account
+1012103598274"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#063B2E"
+            android:layout_marginTop="22dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Your support can help someone move forward."
+            android:textSize="16sp"
+            android:textColor="#555555"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="30dp"/>
+    </LinearLayout>
+</ScrollView>
